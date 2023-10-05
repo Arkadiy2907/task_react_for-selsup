@@ -96,6 +96,22 @@ const model = {
   ],
 };
 
+interface TextParamProps {
+  paramId: number;
+  value: string;
+  onChange: (paramId: number, value: string) => void;
+}
+
+const TextParam: React.FC<TextParamProps> = ({ paramId, value, onChange }) => {
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(paramId, e.target.value)}
+    />
+  );
+};
+
 const ParamEditor: React.FC<Props> = ({ params, model }) => {
   const [paramValues, setParamValues] = useState(model.paramValues);
 
@@ -113,23 +129,32 @@ const ParamEditor: React.FC<Props> = ({ params, model }) => {
     return { paramValues };
   };
 
+  const renderParam = (param: Param) => {
+    if (param.type === "string") {
+      return (
+        <div key={param.id} className="sting">
+          <label className="label">{param.name}</label>
+          <TextParam
+            key={param.id}
+            paramId={param.id}
+            value={
+              paramValues.find((paramValue) => paramValue.paramId === param.id)
+                ?.value || ""
+            }
+            onChange={handleParamChange}
+          />
+        </div>
+      );
+    }
+
+    // other types of parameters
+
+    return null;
+  };
+
   return (
     <div className="MyWrap">
-      {params &&
-        params.map((param) => (
-          <div key={param.id} className="sting">
-            <label className="label">{param.name}</label>
-            <input
-              type="text"
-              value={
-                paramValues.find(
-                  (paramValue) => paramValue.paramId === param.id
-                )?.value || ""
-              }
-              onChange={(e) => handleParamChange(param.id, e.target.value)}
-            />
-          </div>
-        ))}
+      {params && params.map(renderParam)}
       <button className="btn" onClick={() => console.log(getModel())}>
         Получить модель
       </button>
