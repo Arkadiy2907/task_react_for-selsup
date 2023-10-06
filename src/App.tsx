@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "@emotion/styled";
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
 
 const Wrap = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Wrap = styled.div`
     width: max-content;
     font-family: sans-serif;
 
-    .sting {
+    .string {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -73,13 +73,13 @@ interface Props {
 const params = [
   {
     id: 1,
-    name: "Назначение",
-    type: "string",
+    name: 'Назначение',
+    type: 'string',
   },
   {
     id: 2,
-    name: "Длина",
-    type: "string",
+    name: 'Длина',
+    type: 'string',
   },
 ];
 
@@ -87,11 +87,11 @@ const model = {
   paramValues: [
     {
       paramId: 1,
-      value: "повседневное",
+      value: 'повседневное',
     },
     {
       paramId: 2,
-      value: "макси",
+      value: 'макси',
     },
   ],
 };
@@ -130,16 +130,16 @@ const ParamEditor: React.FC<Props> = ({ params, model }) => {
   };
 
   const renderParam = (param: Param) => {
-    if (param.type === "string") {
+    if (param.type === 'string') {
       return (
-        <div key={param.id} className="sting">
+        <div key={param.id} className="string">
           <label className="label">{param.name}</label>
           <TextParam
             key={param.id}
             paramId={param.id}
             value={
               paramValues.find((paramValue) => paramValue.paramId === param.id)
-                ?.value || ""
+                ?.value || ''
             }
             onChange={handleParamChange}
           />
