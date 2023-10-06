@@ -16,8 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strictNullChecks": true,
-    "typeRoots": ["node_modules/@types"],
-    "types": ["react-hook-form"]
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["src"]
 }
